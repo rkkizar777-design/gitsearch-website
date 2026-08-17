@@ -15,7 +15,7 @@ html{scroll-behavior:smooth}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;line-height:1.6}
 body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.025}
 #progress{position:fixed;top:0;left:0;height:2px;width:0;background:linear-gradient(90deg,var(--cyan),var(--accent),var(--pink));z-index:10001;transition:width .3s}
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;transition:all .3s;border-bottom:1px solid transparent}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,28px);transition:all .3s;border-bottom:1px solid transparent}
 nav.solid{background:rgba(8,12,24,.92);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom-color:var(--border)}
 .nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
 .nav-icon{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--cyan),var(--accent),var(--pink));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff}
@@ -23,9 +23,9 @@ nav.solid{background:rgba(8,12,24,.92);backdrop-filter:blur(24px);-webkit-backdr
 .nav-links{display:flex;gap:6px;align-items:center}
 .nav-links a{padding:7px 14px;border-radius:8px;font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;transition:all .2s}
 .nav-links a:hover{color:var(--text);background:rgba(255,255,255,.04)}
-.nav-dl{padding:8px 20px;border-radius:10px;font-size:13px;font-weight:600;background:linear-gradient(135deg,var(--accent),#7c3aed);color:#fff;text-decoration:none;border:none;cursor:pointer;transition:all .2s}
+.nav-dl{padding:8px 20px;border-radius:10px;font-size:13px;font-weight:600;background:linear-gradient(135deg,var(--accent),#7c3aed);color:#fff!important;text-decoration:none;border:none;cursor:pointer;transition:all .2s}
 .nav-dl:hover{box-shadow:0 4px 20px rgba(99,102,241,.3);transform:translateY(-1px)}
-.hamburger{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:8px}
+.hamburger{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:8px;z-index:1001}
 .hamburger span{display:block;width:20px;height:2px;background:var(--text);margin:4px 0;border-radius:2px;transition:all .3s}
 #mobile-nav{display:none;position:fixed;top:60px;left:0;right:0;z-index:999;background:rgba(8,12,24,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:12px 20px 20px}
 #mobile-nav.open{display:block}
@@ -34,6 +34,111 @@ nav.solid{background:rgba(8,12,24,.92);backdrop-filter:blur(24px);-webkit-backdr
 .sec{max-width:1100px;margin:0 auto;padding:90px 24px 60px}
 .sr{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
 .sr.vis{opacity:1;transform:none}
+.grad{background:linear-gradient(135deg,var(--cyan),var(--accent),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:12px;font-size:15px;font-weight:600;text-decoration:none;transition:all .25s;cursor:pointer;border:none}
+.btn-fill{background:linear-gradient(135deg,var(--accent),#7c3aed);color:#fff}
+.btn-fill:hover{box-shadow:0 6px 28px rgba(99,102,241,.35);transform:translateY(-2px)}
+.btn-ghost{background:rgba(255,255,255,.04);color:var(--text);border:1px solid var(--border)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);border-color:var(--accent)}
+
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 24px 60px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;overflow:hidden}
+.hero-glow{position:absolute;border-radius:50%;filter:blur(80px);opacity:.18}
+.hero-glow.a{width:500px;height:500px;background:var(--accent);top:-10%;left:-5%}
+.hero-glow.b{width:400px;height:400px;background:var(--cyan);bottom:0;right:-5%}
+.hero-glow.c{width:300px;height:300px;background:var(--pink);top:40%;left:50%;transform:translate(-50%,-50%)}
+.hero-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.04) 1px,transparent 1px);background-size:30px 30px}
+.hero-inner{position:relative;z-index:1;max-width:800px}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 16px 6px 10px;border-radius:999px;border:1px solid var(--border);background:var(--glass);font-size:13px;color:var(--text2);margin-bottom:28px;backdrop-filter:blur(10px)}
+.hero-pill code{font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--accent2)}
+.live{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(34px,6vw,64px);font-weight:900;line-height:1.1;letter-spacing:-1.5px;margin-bottom:20px}
+.hero-desc{font-size:clamp(15px,2vw,18px);color:var(--text2);line-height:1.7;margin-bottom:32px;max-width:600px;margin-left:auto;margin-right:auto}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.hero-nums{display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
+.hero-num{text-align:center}
+.hero-num .n{font-size:28px;font-weight:800;color:var(--text)}
+.hero-num .l{font-size:12px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.about-text h2{font-size:clamp(24px,3vw,34px);font-weight:800;line-height:1.2;margin-bottom:16px;letter-spacing:-.5px}
+.about-text p{font-size:15px;color:var(--text2);line-height:1.7;margin-bottom:12px}
+.callout{margin-top:20px;padding:16px 20px;border-radius:12px;border:1px solid var(--border);background:rgba(99,102,241,.04);font-size:13px;color:var(--text2);line-height:1.7}
+.callout strong{color:var(--text);font-weight:700}
+.about-visual{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.about-stat{padding:20px 16px;border-radius:14px;border:1px solid var(--border);background:var(--card);text-align:center}
+.about-stat .ico{font-size:24px;margin-bottom:8px}
+.about-stat .val{font-size:20px;font-weight:800;color:var(--text)}
+.about-stat .lbl{font-size:11px;color:var(--text3);margin-top:4px}
+
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px}
+.feat-card{padding:28px 24px;border-radius:16px;border:1px solid var(--border);background:var(--card);transition:all .3s}
+.feat-card:hover{border-color:rgba(99,102,241,.25);transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.feat-ico{font-size:28px;margin-bottom:14px}
+.feat-card h3{font-size:16px;font-weight:700;margin-bottom:6px;color:var(--text)}
+.feat-card p{font-size:13px;color:var(--text2);line-height:1.6}
+
+.showcase{display:flex;gap:48px;align-items:center;justify-content:center}
+.phone-wrap{flex-shrink:0}
+.phone{position:relative;width:280px;height:560px;border-radius:36px;border:2px solid rgba(99,102,241,.2);background:var(--surface);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 0 1px rgba(99,102,241,.1)}
+.phone-notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:120px;height:24px;background:var(--bg);border-radius:0 0 16px 16px;z-index:20;display:flex;align-items:center;justify-content:center}
+.phone-dot{width:6px;height:6px;border-radius:50%;background:var(--text3)}
+.phone-screen{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none}
+.phone-screen::-webkit-scrollbar{display:none}
+.scr{display:none;padding:32px 12px 60px;min-height:100%}
+.scr.on{display:block}
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sh-left{display:flex;align-items:center;gap:6px}
+.sh-logo{width:24px;height:24px;border-radius:7px;background:linear-gradient(135deg,var(--cyan),var(--accent));display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;color:#fff}
+.sh-text{font-size:13px;font-weight:800}
+.sh-gear{font-size:16px;color:var(--text3);cursor:pointer}
+.sh-beta{font-size:8px;font-weight:700;padding:2px 8px;border-radius:999px;background:rgba(52,211,153,.15);color:var(--green);margin-left:6px}
+.ss{display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:10px;background:var(--surface2);margin-bottom:10px;border:1px solid var(--border)}
+.ss span{font-size:12px;color:var(--text3)}
+.ss input{flex:1;background:none;border:none;outline:none;font-size:11px;color:var(--text);font-family:inherit}
+.stabs{display:flex;gap:0;margin-bottom:10px;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.stab{flex:1;padding:6px;font-size:9px;font-weight:600;border:none;cursor:pointer;background:var(--surface2);color:var(--text2);transition:all .2s}
+.stab.on{background:var(--accent);color:#fff}
+.scats{display:flex;gap:4px;margin-bottom:10px;overflow-x:auto;scrollbar-width:none}
+.scats::-webkit-scrollbar{display:none}
+.scat{flex-shrink:0;padding:4px 10px;border-radius:999px;font-size:8px;font-weight:600;border:1px solid var(--border);background:none;color:var(--text3);cursor:pointer;transition:all .2s}
+.scat.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+.fy{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
+.fyc{padding:8px;border-radius:10px;background:var(--surface2);border:1px solid var(--border);cursor:pointer;transition:all .2s}
+.fyc:hover{border-color:rgba(99,102,241,.3)}
+.fyc-ico{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;margin-bottom:6px}
+.fyc .nm{font-size:10px;font-weight:700}
+.fyc .ds{font-size:8px;color:var(--text3);margin-top:1px}
+.fyc .st{font-size:8px;color:var(--text2);margin-top:4px}
+.rc{padding:10px;border-radius:12px;background:var(--surface2);border:1px solid var(--border);margin-bottom:8px;cursor:pointer;transition:all .2s}
+.rc:hover{border-color:rgba(99,102,241,.3)}
+.rc-top{display:flex;align-items:center;gap:6px;margin-bottom:6px}
+.rc-av{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff}
+.rc-owner{font-size:10px;color:var(--text2)}
+.rc-verified{font-size:8px;color:var(--cyan)}
+.rc-name{font-size:12px;font-weight:700;margin-bottom:3px}
+.rc-desc{font-size:9px;color:var(--text3);line-height:1.4;margin-bottom:6px}
+.rc-foot{display:flex;gap:10px;font-size:8px;color:var(--text3);flex-wrap:wrap}
+.rc-lang{display:flex;align-items:center;gap:3px}
+.rc-dot{width:6px;height:6px;border-radius:50%;display:inline-block}
+
+@media(max-width:900px){
+.feat-grid{grid-template-columns:1fr 1fr}
+.about-grid{grid-template-columns:1fr;gap:32px}
+.showcase{flex-direction:column}
+.phone-wrap{transform:scale(.85)}
+}
+@media(max-width:640px){
+.nav-links{display:none}
+.hamburger{display:block}
+.feat-grid{grid-template-columns:1fr}
+.hero h1{font-size:32px;letter-spacing:-.5px}
+.hero-nums{gap:24px}
+.hero{padding:80px 16px 40px;min-height:auto}
+.sec{padding:60px 16px 40px}
+.phone-wrap{transform:scale(.7)}
+}
 </style>
 </head>
 <body>
@@ -56,7 +161,7 @@ nav.solid{background:rgba(8,12,24,.92);backdrop-filter:blur(24px);-webkit-backdr
   <a href="#showcase">Showcase</a>
   <a href="#pc">Git Store PC</a>
   <a href="#changelog">Updates</a>
-  <a href="#download" class="nav-dl" style="display:block;text-align:center;margin-top:8px">Download</a>
+  <a href="#download">Download</a>
 </div>
 
 <section class="hero" id="top">
@@ -97,17 +202,16 @@ nav.solid{background:rgba(8,12,24,.92);backdrop-filter:blur(24px);-webkit-backdr
     </div>
   </div>
 </section>
-
 <section class="sec" id="features">
   <h2 class="sr" style="font-size:clamp(26px,3.5vw,38px);font-weight:800;text-align:center;margin-bottom:8px">What you can do</h2>
   <p class="sr" style="text-align:center;color:var(--text2);font-size:15px;margin-bottom:8px">Every feature built with a real use case in mind</p>
   <div class="feat-grid">
-    <div class="feat-card sr"><div class="feat-ico">&#128269;</div><h3>Smart Search</h3><p>Search millions of repos with filters for language, stars, date, topics. Real-time results, no loading spinners for every little thing.</p></div>
-    <div class="feat-card sr"><div class="feat-ico">&#128214;</div><h3>README Reader</h3><p>Beautiful, distraction-free reading for any repo's README. Syntax highlighting, images, tables &mdash; everything just works.</p></div>
-    <div class="feat-card sr"><div class="feat-ico">&#128230;</div><h3>APK Store</h3><p>Browse GitHub repos that ship APK releases. One tap to install. Every release, every version, right in the app. Still in beta, but already useful.</p></div>
-    <div class="feat-card sr"><div class="feat-ico">&#128172;</div><h3>GitChat</h3><p>P2P messaging with other developers. No servers in the middle. Sign in with GitHub, find people, start talking.</p></div>
-    <div class="feat-card sr"><div class="feat-ico">&#128101;</div><h3>Follow &amp; Discover</h3><p>Follow devs you find interesting. Your For You feed gets smarter as you explore. Trending repos, personalized picks, the works.</p></div>
-    <div class="feat-card sr"><div class="feat-ico">&#127942;</div><h3>Achievements</h3><p>Earn badges, track streaks, unlock milestones. A bit of gamification to make exploring open source more fun.</p></div>
+    <div class="feat-card sr"><div class="feat-ico">&#128269;</div><h3>Smart Search</h3><p>Search millions of repos with filters for language, stars, date, topics. Real-time results.</p></div>
+    <div class="feat-card sr"><div class="feat-ico">&#128214;</div><h3>README Reader</h3><p>Beautiful, distraction-free reading for any repo's README. Syntax highlighting, images, tables.</p></div>
+    <div class="feat-card sr"><div class="feat-ico">&#128230;</div><h3>APK Store</h3><p>Browse GitHub repos that ship APK releases. One tap to install. Every release, every version.</p></div>
+    <div class="feat-card sr"><div class="feat-ico">&#128172;</div><h3>GitChat</h3><p>P2P messaging with other developers. No servers in the middle. Sign in with GitHub.</p></div>
+    <div class="feat-card sr"><div class="feat-ico">&#128101;</div><h3>Follow &amp; Discover</h3><p>Follow devs you find interesting. Your For You feed gets smarter as you explore.</p></div>
+    <div class="feat-card sr"><div class="feat-ico">&#127942;</div><h3>Achievements</h3><p>Earn badges, track streaks, unlock milestones. A bit of gamification to make it fun.</p></div>
   </div>
 </section>
 
@@ -130,12 +234,12 @@ nav.solid{background:rgba(8,12,24,.92);backdrop-filter:blur(24px);-webkit-backdr
               <div class="fyc"><div class="fyc-ico" style="background:linear-gradient(135deg,#f472b6,#db2777)">&#128230;</div><div class="nm">vue</div><div class="ds">Progressive FW</div><div class="st"><span>&#11088; 210k</span></div></div>
               <div class="fyc"><div class="fyc-ico" style="background:linear-gradient(135deg,#34d399,#059669)">&#129302;</div><div class="nm">pytorch</div><div class="ds">ML framework</div><div class="st"><span>&#11088; 85k</span></div></div>
             </div>
-            <div class="rc"><div class="rc-top"><div class="rc-av" style="background:linear-gradient(135deg,#22d3ee,#0891b2)">K</div><span class="rc-owner">vercel</span><span class="rc-verified">&#10003;</span></div><div class="rc-name">next.js</div><div class="rc-desc">The React Framework for the Web. Used by some of the world's largest companies.</div><div class="rc-foot"><span>&#11088; 128k</span><span>&#127860; 27.4k</span><span class="rc-lang"><span class="rc-dot" style="background:#3178c6"></span> TypeScript</span></div></div>
-            <div class="rc"><div class="rc-top"><div class="rc-av" style="background:linear-gradient(135deg,#fb923c,#f97316)">&#128293;</div><span class="rc-owner">rust-lang</span><span class="rc-verified">&#10003;</span></div><div class="rc-name">rust</div><div class="rc-desc">Empowering everyone to build reliable and efficient software.</div><div class="rc-foot"><span>&#11088; 100k</span><span>&#127860; 13k</span><span class="rc-lang"><span class="rc-dot" style="background:#dea584"></span> Rust</span></div></div>
+            <div class="rc"><div class="rc-top"><div class="rc-av" style="background:linear-gradient(135deg,#22d3ee,#0891b2)">K</div><span class="rc-owner">vercel</span><span class="rc-verified">&#10003;</span></div><div class="rc-name">next.js</div><div class="rc-desc">The React Framework for the Web.</div><div class="rc-foot"><span>&#11088; 128k</span><span>&#127860; 27.4k</span><span class="rc-lang"><span class="rc-dot" style="background:#3178c6"></span> TypeScript</span></div></div>
+            <div class="rc"><div class="rc-top"><div class="rc-av" style="background:linear-gradient(135deg,#fb923c,#f97316)">&#128293;</div><span class="rc-owner">rust-lang</span><span class="rc-verified">&#10003;</span></div><div class="rc-name">rust</div><div class="rc-desc">Empowering everyone to build reliable software.</div><div class="rc-foot"><span>&#11088; 100k</span><span>&#127860; 13k</span><span class="rc-lang"><span class="rc-dot" style="background:#dea584"></span> Rust</span></div></div>
           </div>
           <div class="scr" id="sc-saved"><div class="sh"><div class="sh-left"><span style="font-size:13px;font-weight:800">&#128278; Saved Repos</span></div></div><div class="rc"><div class="rc-top"><div class="rc-av" style="background:linear-gradient(135deg,#22d3ee,#0891b2)">K</div><span class="rc-owner">vercel</span></div><div class="rc-name">next.js</div><div class="rc-desc">The React Framework for the Web.</div><div class="rc-foot"><span>&#11088; 128k</span><span>&#127860; 27k</span></div></div><div class="rc"><div class="rc-top"><div class="rc-av" style="background:linear-gradient(135deg,#34d399,#059669)">&#129302;</div><span class="rc-owner">facebook</span></div><div class="rc-name">react</div><div class="rc-desc">A JavaScript library for building user interfaces.</div><div class="rc-foot"><span>&#11088; 230k</span><span>&#127860; 45k</span></div></div></div>
           <div class="scr" id="sc-store"><div class="sh"><div class="sh-left"><span style="font-size:13px;font-weight:800">&#9889; APK Store</span><span class="sh-beta">BETA</span></div></div><div class="scats"><button class="scat on">All</button><button class="scat">Games</button><button class="scat">Tools</button><button class="scat">Social</button></div><div class="rc" style="border-color:rgba(52,211,153,.2)"><div class="rc-top"><div class="rc-av" style="background:linear-gradient(135deg,#34d399,#059669)">&#128737;</div><span class="rc-owner">privacylabs</span></div><div class="rc-name">SecureVault</div><div class="rc-desc">End-to-end encrypted file storage</div><div class="rc-foot"><span>&#128229; 12k</span><span>&#128230; 4.2 MB</span></div></div><div class="rc" style="border-color:rgba(129,140,248,.2)"><div class="rc-top"><div class="rc-av" style="background:linear-gradient(135deg,#818cf8,#6366f1)">&#127912;</div><span class="rc-owner">artstudio</span></div><div class="rc-name">PixelForge</div><div class="rc-desc">AI-powered image editor</div><div class="rc-foot"><span>&#128229; 8.3k</span><span>&#128230; 12 MB</span></div></div></div>
-          <div class="scr" id="sc-chat"><div class="sh"><div class="sh-left"><span style="font-size:13px;font-weight:800">&#128172; GitChat</span></div></div><div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;cursor:pointer"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#22d3ee,#0891b2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">K</div><div style="flex:1"><div style="font-size:11px;font-weight:700">kizar777</div><div style="font-size:8px;color:var(--text2)">Check out the new update &#128640;</div></div><div style="font-size:8px;color:var(--text3)">2m</div></div><div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;cursor:pointer"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f472b6,#db2777);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">A</div><div style="flex:1"><div style="font-size:11px;font-weight:700">alex_dev</div><div style="font-size:8px;color:var(--text2)">Can you help with the API?</div></div><div style="font-size:8px;color:var(--text3)">15m</div></div></div>
+          <div class="scr" id="sc-chat"><div class="sh"><div class="sh-left"><span style="font-size:13px;font-weight:800">&#128172; GitChat</span></div></div><div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#22d3ee,#0891b2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">K</div><div style="flex:1"><div style="font-size:11px;font-weight:700">kizar777</div><div style="font-size:8px;color:var(--text2)">Check out the new update &#128640;</div></div><div style="font-size:8px;color:var(--text3)">2m</div></div><div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f472b6,#db2777);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">A</div><div style="flex:1"><div style="font-size:11px;font-weight:700">alex_dev</div><div style="font-size:8px;color:var(--text2)">Can you help with the API?</div></div><div style="font-size:8px;color:var(--text3)">15m</div></div></div>
           <div class="scr" id="sc-following"><div class="sh"><div class="sh-left"><span style="font-size:13px;font-weight:800">&#128101; Following</span></div></div><div style="padding:6px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#22d3ee,#0891b2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">K</div><div style="flex:1"><div style="font-size:11px;font-weight:700">kizar777</div><div style="font-size:8px;color:var(--text2)">24 repos &#183; &#11088; 156</div></div><button style="padding:4px 10px;border-radius:6px;border:1px solid var(--accent);background:none;color:var(--accent2);font-size:9px;font-weight:600;cursor:pointer">Following</button></div><div style="padding:6px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px"><div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#34d399,#059669);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff">M</div><div style="flex:1"><div style="font-size:11px;font-weight:700">mayuri</div><div style="font-size:8px;color:var(--text2)">18 repos &#183; &#11088; 89</div></div><button style="padding:4px 10px;border-radius:6px;border:1px solid var(--accent);background:none;color:var(--accent2);font-size:9px;font-weight:600;cursor:pointer">Following</button></div></div>
           <div class="scr" id="sc-profile"><div class="sh"><div class="sh-left"><span style="font-size:13px;font-weight:800">&#128100; Profile</span></div><div class="sh-gear">&#9881;</div></div><div style="text-align:center;padding:12px 0"><div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--pink));display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;margin:0 auto 8px">K</div><div style="font-size:13px;font-weight:800">kizar777</div><div style="font-size:9px;color:var(--text2)">@kizar777</div></div><div style="display:flex;justify-content:center;gap:16px;padding:8px;background:var(--surface2);border-radius:10px;margin-bottom:10px"><div style="text-align:center"><div style="font-size:13px;font-weight:800">24</div><div style="font-size:8px;color:var(--text2)">Repos</div></div><div style="text-align:center"><div style="font-size:13px;font-weight:800">156</div><div style="font-size:8px;color:var(--text2)">Stars</div></div><div style="text-align:center"><div style="font-size:13px;font-weight:800">89</div><div style="font-size:8px;color:var(--text2)">Following</div></div></div><div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:center"><span style="padding:3px 8px;border-radius:999px;font-size:8px;font-weight:600;border:1px solid var(--border)">&#10003; Verified</span><span style="padding:3px 8px;border-radius:999px;font-size:8px;font-weight:600;border:1px solid var(--border)">&#128293; 14-Day Streak</span><span style="padding:3px 8px;border-radius:999px;font-size:8px;font-weight:600;border:1px solid var(--border)">&#127942; Explorer</span></div></div>
         </div>
@@ -151,7 +255,7 @@ nav.solid{background:rgba(8,12,24,.92);backdrop-filter:blur(24px);-webkit-backdr
     </div>
     <div style="max-width:340px" class="sr">
       <h3 style="font-size:22px;font-weight:800;margin-bottom:10px">Every screen, one tap away</h3>
-      <p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px">Discover trending repos, save your favorites, browse the APK store, chat with devs, follow people, and manage your profile &mdash; all without leaving the app.</p>
+      <p style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px">Discover trending repos, save your favorites, browse the APK store, chat with devs, follow people, and manage your profile.</p>
       <div style="display:flex;flex-direction:column;gap:10px">
         <div style="display:flex;gap:10px;align-items:start"><span style="font-size:18px">&#128269;</span><div><strong style="font-size:13px">Discover</strong><p style="font-size:12px;color:var(--text2)">Search, filter, explore. Smart categories and personalized feeds.</p></div></div>
         <div style="display:flex;gap:10px;align-items:start"><span style="font-size:18px">&#128230;</span><div><strong style="font-size:13px">APK Store</strong><p style="font-size:12px;color:var(--text2)">Browse repos that ship APKs. One-tap download and install.</p></div></div>
@@ -160,7 +264,6 @@ nav.solid{background:rgba(8,12,24,.92);backdrop-filter:blur(24px);-webkit-backdr
     </div>
   </div>
 </section>
-
 <section class="sec" id="pc" style="background:linear-gradient(180deg,transparent,rgba(99,102,241,.03),transparent)">
   <div class="about-grid" style="direction:rtl">
     <div class="sr" style="direction:ltr">
@@ -168,52 +271,43 @@ nav.solid{background:rgba(8,12,24,.92);backdrop-filter:blur(24px);-webkit-backdr
         <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--accent))"></div>
         <div style="font-size:48px;margin-bottom:16px">&#128187;</div>
         <h3 style="font-size:20px;font-weight:800;margin-bottom:8px">Git Store for PC</h3>
-        <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:20px">The desktop version of the app. Search GitHub, read docs, manage repos &mdash; all from your computer. Built with the same philosophy: fast, private, no BS.</p>
+        <p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:20px">The desktop version. Search GitHub, read docs, manage repos &mdash; all from your computer. Fast, private, no BS.</p>
         <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
           <a href="https://github.com/rkkizar777-design/git.store/releases" class="btn btn-fill" style="font-size:12px;padding:10px 20px">Download for PC</a>
           <a href="https://github.com/rkkizar777-design/git.store" class="btn btn-ghost" style="font-size:12px;padding:10px 20px">View Source</a>
         </div>
         <div style="display:flex;gap:20px;justify-content:center;margin-top:20px;font-size:11px;color:var(--text2)">
-          <span>&#128187; Windows</span><span>&#128187; macOS</span><span>&#128187; Linux</span>
+          <span>Windows</span><span>macOS</span><span>Linux</span>
         </div>
       </div>
     </div>
     <div class="about-text sr" style="direction:ltr">
       <h2>Your repos,<br><span class="grad">on your desktop</span></h2>
-      <p>Git Store brings the same fast, clean GitHub exploration experience to your computer. Whether you're on Windows, macOS, or Linux &mdash; it just works.</p>
+      <p>Git Store brings the same fast, clean GitHub exploration experience to your computer. Windows, macOS, Linux &mdash; it just works.</p>
       <p>Same search power, same beautiful README reader, same zero-tracking philosophy. Sign in with your GitHub account for the full experience.</p>
-      <div class="callout"><strong>Open source.</strong> The desktop app is fully open source. Check the repo, fork it, contribute, or just see how it works under the hood.</div>
+      <div class="callout"><strong>Open source.</strong> The desktop app is fully open source. Check the repo, fork it, contribute, or just see how it works.</div>
     </div>
   </div>
 </section>
-
 <section class="sec" id="changelog">
   <h2 class="sr" style="font-size:clamp(26px,3.5vw,38px);font-weight:800;text-align:center;margin-bottom:8px">What's new</h2>
-  <p class="sr" style="text-align:center;color:var(--text2);font-size:15px;margin-bottom:40px">Recent updates and fixes &mdash; we ship fast</p>
+  <p class="sr" style="text-align:center;color:var(--text2);font-size:15px;margin-bottom:40px">Recent updates and fixes</p>
   <div style="max-width:700px;margin:0 auto;position:relative;padding-left:32px">
     <div style="position:absolute;left:12px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--accent),var(--border),transparent)"></div>
-    
     <div class="sr" style="position:relative;margin-bottom:36px;padding-left:24px">
       <div style="position:absolute;left:-26px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--bg)"></div>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-        <code style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--accent2)">v1.0.0.43</code>
-        <span style="font-size:11px;color:var(--text3)">Aug 2026</span>
-      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><code style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--accent2)">v1.0.0.43</code><span style="font-size:11px;color:var(--text3)">Aug 2026</span></div>
       <h4 style="font-size:15px;font-weight:700;margin-bottom:4px">Update checker &amp; APK Store fixed</h4>
       <ul style="font-size:13px;color:var(--text2);line-height:1.8;padding-left:16px">
         <li>Update checker now works &mdash; was always showing error even when API succeeded</li>
-        <li>APK Store search no longer empty &mdash; rate limiting handled with proper wait-and-retry</li>
+        <li>APK Store search no longer empty &mdash; rate limiting handled with wait-and-retry</li>
         <li>Shared rate limit state between all API layers</li>
         <li>ForYou queries reduced to prevent burning through rate limits</li>
       </ul>
     </div>
-
     <div class="sr" style="position:relative;margin-bottom:36px;padding-left:24px">
       <div style="position:absolute;left:-26px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent2);border:2px solid var(--bg)"></div>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-        <code style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--accent2)">v1.0.0.42</code>
-        <span style="font-size:11px;color:var(--text3)">Aug 2026</span>
-      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><code style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--accent2)">v1.0.0.42</code><span style="font-size:11px;color:var(--text3)">Aug 2026</span></div>
       <h4 style="font-size:15px;font-weight:700;margin-bottom:4px">Complete API hardening</h4>
       <ul style="font-size:13px;color:var(--text2);line-height:1.8;padding-left:16px">
         <li>All fetches now have 40s timeout and 3 retries with exponential backoff</li>
@@ -222,13 +316,9 @@ nav.solid{background:rgba(8,12,24,.92);backdrop-filter:blur(24px);-webkit-backdr
         <li>README always loads with 3 independent retries and stale cache fallback</li>
       </ul>
     </div>
-
     <div class="sr" style="position:relative;margin-bottom:36px;padding-left:24px">
       <div style="position:absolute;left:-26px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--cyan);border:2px solid var(--bg)"></div>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-        <code style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--accent2)">v1.0.0.41</code>
-        <span style="font-size:11px;color:var(--text3)">Aug 2026</span>
-      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><code style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--accent2)">v1.0.0.41</code><span style="font-size:11px;color:var(--text3)">Aug 2026</span></div>
       <h4 style="font-size:15px;font-weight:700;margin-bottom:4px">README &amp; search fixes</h4>
       <ul style="font-size:13px;color:var(--text2);line-height:1.8;padding-left:16px">
         <li>README now loads on Android &mdash; bypasses blocked raw.githubusercontent.com</li>
@@ -236,13 +326,9 @@ nav.solid{background:rgba(8,12,24,.92);backdrop-filter:blur(24px);-webkit-backdr
         <li>Expired tokens auto-clear and retry without auth</li>
       </ul>
     </div>
-
     <div class="sr" style="position:relative;margin-bottom:36px;padding-left:24px">
       <div style="position:absolute;left:-26px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--green);border:2px solid var(--bg)"></div>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-        <code style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--accent2)">v1.0.0.40</code>
-        <span style="font-size:11px;color:var(--text3)">Aug 2026</span>
-      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><code style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--accent2)">v1.0.0.40</code><span style="font-size:11px;color:var(--text3)">Aug 2026</span></div>
       <h4 style="font-size:15px;font-weight:700;margin-bottom:4px">GitStore browsing restored</h4>
       <ul style="font-size:13px;color:var(--text2);line-height:1.8;padding-left:16px">
         <li>CapacitorHttp disabled &mdash; was intercepting all fetch() calls</li>
@@ -250,13 +336,9 @@ nav.solid{background:rgba(8,12,24,.92);backdrop-filter:blur(24px);-webkit-backdr
         <li>Stale date filters updated for 2026</li>
       </ul>
     </div>
-
     <div class="sr" style="position:relative;padding-left:24px">
       <div style="position:absolute;left:-26px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--pink);border:2px solid var(--bg)"></div>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-        <code style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--accent2)">v1.0.0.39</code>
-        <span style="font-size:11px;color:var(--text3)">Aug 2026</span>
-      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><code style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;color:var(--accent2)">v1.0.0.39</code><span style="font-size:11px;color:var(--text3)">Aug 2026</span></div>
       <h4 style="font-size:15px;font-weight:700;margin-bottom:4px">APK Store &amp; download plugin</h4>
       <ul style="font-size:13px;color:var(--text2);line-height:1.8;padding-left:16px">
         <li>Native APK download plugin for direct install from GitHub releases</li>
@@ -266,7 +348,6 @@ nav.solid{background:rgba(8,12,24,.92);backdrop-filter:blur(24px);-webkit-backdr
     </div>
   </div>
 </section>
-
 <section class="sec" id="download">
   <h2 class="sr" style="font-size:clamp(26px,3.5vw,38px);font-weight:800;text-align:center;margin-bottom:8px">Get GitSearch</h2>
   <p class="sr" style="text-align:center;color:var(--text2);font-size:15px;margin-bottom:40px">Free. Open source. No strings attached.</p>
@@ -276,7 +357,7 @@ nav.solid{background:rgba(8,12,24,.92);backdrop-filter:blur(24px);-webkit-backdr
       <div style="font-size:36px;margin-bottom:12px">&#128241;</div>
       <h3 style="font-size:18px;font-weight:800;margin-bottom:4px">Android</h3>
       <p style="font-size:12px;color:var(--text2);margin-bottom:16px">Native Android app &mdash; download the APK directly</p>
-      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);margin-bottom:16px">v1.0.0.43 &middot; ~8 MB</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text3);margin-bottom:16px">v1.0.0.43</div>
       <a href="https://github.com/rkkizar777-design/git.store.apk/releases/download/v1.0.0.43/gitsearch.apk" class="btn btn-fill" style="width:100%;justify-content:center">Download APK</a>
       <div style="font-size:11px;color:var(--text3);margin-top:10px">Requires Android 7.0+ &middot; Unknown sources</div>
     </div>
@@ -304,11 +385,10 @@ nav.solid{background:rgba(8,12,24,.92);backdrop-filter:blur(24px);-webkit-backdr
     <a href="https://github.com/rkkizar777-design/gitsearch-website" style="font-size:12px;color:var(--text2);text-decoration:none">Website Source</a>
   </div>
 </footer>
-
 <script>
 function showScreen(id, btn) {
-  document.querySelectorAll('.scr').forEach(s => s.classList.remove('on'));
-  document.querySelectorAll('.pnav').forEach(b => { b.classList.remove('on'); b.style.color = 'var(--text2)'; });
+  document.querySelectorAll('.scr').forEach(function(s) { s.classList.remove('on'); });
+  document.querySelectorAll('.pnav').forEach(function(b) { b.classList.remove('on'); b.style.color = 'var(--text2)'; });
   var el = document.getElementById('sc-' + id);
   if (el) el.classList.add('on');
   if (btn) { btn.classList.add('on'); btn.style.color = 'var(--accent2)'; }
@@ -316,18 +396,18 @@ function showScreen(id, btn) {
 document.querySelectorAll('.pnav').forEach(function(b) {
   if (b.classList.contains('on')) b.style.color = 'var(--accent2)';
 });
-var burger = document.getElementById('burger');
-var mnav = document.getElementById('mobile-nav');
-burger.onclick = function() {
-  burger.classList.toggle('open');
-  mnav.classList.toggle('open');
+document.getElementById('burger').onclick = function() {
+  this.classList.toggle('open');
+  document.getElementById('mobile-nav').classList.toggle('open');
 };
 document.querySelectorAll('#mobile-nav a').forEach(function(a) {
-  a.onclick = function() { burger.classList.remove('open'); mnav.classList.remove('open'); };
+  a.onclick = function() {
+    document.getElementById('burger').classList.remove('open');
+    document.getElementById('mobile-nav').classList.remove('open');
+  };
 });
 window.addEventListener('scroll', function() {
-  var nav = document.getElementById('topnav');
-  nav.classList.toggle('solid', window.scrollY > 40);
+  document.getElementById('topnav').classList.toggle('solid', window.scrollY > 40);
   var h = document.documentElement.scrollHeight - window.innerHeight;
   document.getElementById('progress').style.width = (h > 0 ? (window.scrollY / h * 100) : 0) + '%';
 });
